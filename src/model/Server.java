@@ -10,21 +10,22 @@ import java.util.ArrayList;
  * This server is single-threaded.
  *
  * @author www.codejava.net
+ * Modified by: Matteo Pulcini
  */
 public class Server {
  
     public static void main(String[] args) {
-        if (args.length < 1) return;
+        if (args.length < 1) return; //command line arguments
  
-        int port = Integer.parseInt(args[0]);
+        int port = Integer.parseInt(args[0]); //sets port number 
         int index = 0;
-        ArrayList<String> a = new ArrayList<String>();
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
+        ArrayList<String> a = new ArrayList<String>(); 
+        try (ServerSocket serverSocket = new ServerSocket(port)) { //declares 'resource' that must be closed, end of block
  
-            System.out.println("Server is listening on port " + port);
+            System.out.println("Server is listening on port " + port); 
  
             while (true) {
-                Socket socket = serverSocket.accept();
+                Socket socket = serverSocket.accept(); 
                 System.out.println("New client connected");
  
                 InputStream input = socket.getInputStream();
@@ -37,13 +38,11 @@ public class Server {
  
                 do {
                     text = reader.readLine();
-                   
                     a.add(text);
-                    writer.println("Server (Blocked Site): " + text);
+                    writer.println("Server (Blocked Site): " + text); //automatic flushing with println
                     writer.println(a.get(index));
                     index++;
                 } while (!text.equals("bye"));
- 
                 socket.close();
             }
  

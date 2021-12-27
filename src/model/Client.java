@@ -31,7 +31,7 @@ public class Client {
             String text;
  
             do {
-                text = console.readLine("Enter text: ");
+                text = console.readLine("Enter text: "); 
  
                 writer.println(text);
  
